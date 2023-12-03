@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ratatype-login-2/static/css/main.67ba63ee.css",
+    "main.js": "/ratatype-login-2/static/js/main.9d96f9aa.js",
+    "index.html": "/ratatype-login-2/index.html",
+    "main.67ba63ee.css.map": "/ratatype-login-2/static/css/main.67ba63ee.css.map",
+    "main.9d96f9aa.js.map": "/ratatype-login-2/static/js/main.9d96f9aa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67ba63ee.css",
+    "static/js/main.9d96f9aa.js"
+  ]
+}
