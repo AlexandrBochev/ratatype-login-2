@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { LogIn } from "./conponents/LogIn/LogIn"
+import { RatatypeLogo } from "./conponents/icons/RatatypeLogo"
 
-function App() {
+const  App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <main className="w-full flex flex-col items-center px-5">
+      <header className="py-[0.62rem] sm:py-[1.25rem]">
+        <a href="/"><RatatypeLogo /></a>
       </header>
-    </div>
-  );
+      <LogIn />
+    </main>
+  )
 }
 
-export default App;
+export { App }
