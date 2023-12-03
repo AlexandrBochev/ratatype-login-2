@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 import { Google } from "../icons/Google"
@@ -9,31 +9,43 @@ const checkUser = {
   password: 'Test1234',
 }
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+
 const LogIn = () => {
   const [user, setUser] = useState({ email: '', password: '' })
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
   const [isEmailValid, setIsEmailValid] = useState(true)
-  const [isPasslValid, setIsPassValid] = useState(true)
+  const [isPassValid, setIsPassValid] = useState(true)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.id]: e.target.value })
+  useEffect(() => {
+    if (user.email && user.password && isEmailValid && isPassValid) {
+      setIsBtnDisabled(false)
+    } else {
+      setIsBtnDisabled(true)
+    }
+  }, [user, isEmailValid, isPassValid])
+
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!emailRegex.test(e.target.value)) {
+      setIsEmailValid(false)
+    } else {
+      setIsEmailValid(true)
+      setUser({ ...user, email: e.target.value })
+    }
+  }
+
+  const handleChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!passRegex.test(e.target.value)) {
+      setIsPassValid(false)
+    } else {
+      setIsPassValid(true)
+      setUser({ ...user, password: e.target.value })
+    }
   }
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/
-    if (!emailRegex.test(user.email)) {
-      setIsEmailValid(false)
-      return
-    }
-    setIsEmailValid(true)
-
-    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    if (!passRegex.test(user.password)) {
-      setIsPassValid(false)
-      return
-    }
-    setIsPassValid(true)
 
     if (user.email !== checkUser.email || user.password !== checkUser.password) {
       alert('Wrong email or password')
@@ -52,9 +64,9 @@ const LogIn = () => {
       <Button onClick={ () => alert('Log in whith Google') }><Google />Google</Button>
       <p className="font-medium my-[0.9375rem] sm:my-[1.25rem]">або</p>
       <form onSubmit={ handleSubmit } className="w-full">
-        <Input type="text" label="Ел. пошта" id='email' handleChange={ handleChange } isValid={ isEmailValid } />
-        <Input type="password" label="Пароль" id='password' handleChange={ handleChange } isValid={ isPasslValid } />
-        <Button changeColor={true} type="submit">Увійти</Button>
+        <Input type="text" label="Ел. пошта" id='email' handleChange={ handleChangeEmail } isValid={ isEmailValid } />
+        <Input type="password" label="Пароль" id='password' handleChange={ handleChangePass } isValid={ isPassValid } />
+        <Button changeColor={true} disabled={ isBtnDisabled } type="submit">Увійти</Button>
       </form>
       <p className="font-medium my-[0.9375rem] sm:my-[1.25rem]">
         Ще не з нами?

@@ -1,14 +1,15 @@
 interface InputProps {
   type: string
   label: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   id: string
-  isValid?: boolean
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  isValid: boolean
 }
 
-const Input = ({ type, label, handleChange, id, isValid }: InputProps) => {
+const Input = ({ type, label, id, handleChange, isValid }: InputProps) => {
+
   return (
-    <div className="relative mb-[0.937rem] sm:mb-[1.25] font-medium text-darck_gray">
+    <div className="relative w-full mb-[0.937rem] sm:mb-[1.25] font-medium text-darck_gray">
       <input
         id={ id }
         className={`
@@ -32,13 +33,20 @@ const Input = ({ type, label, handleChange, id, isValid }: InputProps) => {
         { label }
       </label>
 
-      {id === 'email' && !isValid && <p className="text-[0.875rem] sm:text-[1rem] text-red">Вкажіть вашу ел. пошту</p>}
-      {id === 'password' && !isValid && <p className="text-[0.875rem] sm:text-[1rem] text-red">Мінімум 8 символів: цифри, великі та малі літери (a-z).</p>}
+      {id === 'email' && !isValid &&
+        <p className="text-[0.875rem] sm:text-[1rem] text-red">
+          Вкажіть вашу ел. пошту
+        </p>
+      }
+
+      {id === 'password' && !isValid &&
+        <p className="text-[0.875rem] sm:text-[1rem] text-red">
+          Мінімум 8 символів: цифри, великі та малі літери (a-z).
+        </p>
+      }
+      
       {id === 'password' &&
-        <p
-          className="underline inline cursor-pointer text-[0.875rem] sm:text-[1rem]"
-          onClick={ () => alert('Forgot password?') }
-        >
+        <p className="underline inline cursor-pointer text-[0.875rem] sm:text-[1rem]" onClick={ () => alert('Forgot password?') }>
           Не пам'ятаєш пароль?
         </p>
       }

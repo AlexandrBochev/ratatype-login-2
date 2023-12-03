@@ -10,6 +10,7 @@ module.exports = {
         big_yellow: '0px 6px 0px 0px #FFCC00',
         brand: '0px 4px 0px 0px #00ACFF',
         big_brand: '0px 6px 0px 0px #00ACFF',
+        disabled: '0px 0px 0px 0px #000000',
       },
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
